@@ -1,4 +1,5 @@
 import { MdSearch } from "react-icons/md";
+import CountryCard from "~/components/CountryCard";
 
 export default function Index() {
   return (
@@ -17,6 +18,16 @@ export default function Index() {
           />
         </div>
         <div>{/* TODO: Filter dropdown */}</div>
+      </div>
+      <div className="mt-10 flex flex-wrap gap-[75px]">
+        <CountryCard />
+        <CountryCard />
+        <CountryCard />
+        <CountryCard />
+        <CountryCard />
+        <CountryCard />
+        <CountryCard />
+        <CountryCard />
       </div>
     </main>
   );
