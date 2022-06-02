@@ -1,9 +1,19 @@
+import { json } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
 import { MdSearch } from "react-icons/md";
 import CountryCard from "~/components/CountryCard";
+import type { Country } from "~/types";
+
+export async function loader() {
+  const res = await fetch("https://restcountries.com/v3.1/all");
+  return json(await res.json());
+}
 
 export default function Index() {
+  const countries = useLoaderData<Country[]>();
+
   return (
-    <main className="px-20 py-10">
+    <main className="px-20 py-10 max-w-[1441px]">
       <div>
         <div className="relative rounded-md shadow-md w-[480px] h-14 text-input-light">
           <div className="absolute inset-y-0 left-0 pl-8 flex items-center pointer-events-none">
@@ -19,15 +29,10 @@ export default function Index() {
         </div>
         <div>{/* TODO: Filter dropdown */}</div>
       </div>
-      <div className="mt-10 flex flex-wrap gap-[75px]">
-        <CountryCard />
-        <CountryCard />
-        <CountryCard />
-        <CountryCard />
-        <CountryCard />
-        <CountryCard />
-        <CountryCard />
-        <CountryCard />
+      <div className="mt-10 flex flex-wrap gap-[75px] w-full">
+        {countries.map((country, i) => (
+          <CountryCard country={country} key={i} />
+        ))}
       </div>
     </main>
   );
