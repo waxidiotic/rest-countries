@@ -1,8 +1,9 @@
+import React from "react";
 import { MdOutlineDarkMode } from "react-icons/md";
 
 export default function Nav() {
   return (
-    <div className="h-20 w-full flex justify-between bg-white px-4 sm:px-20 items-center shadow-lg">
+    <div className="h-20 w-full flex justify-between bg-white dark:bg-elements-dark px-4 sm:px-20 items-center shadow-lg dark:text-white">
       <div className="sm:text-2xl text-sm font-extrabold">
         Where in the world?
       </div>

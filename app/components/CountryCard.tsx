@@ -2,7 +2,7 @@ import type { Country } from "~/types";
 
 export default function CountryCard({ country }: { country: Country }) {
   return (
-    <div className="bg-white w-[264px] shadow-md">
+    <div className="bg-white w-[264px] shadow-md dark:bg-elements-dark dark:text-white">
       <img
         src={`https://flagcdn.com/${country.cca2.toLowerCase()}.svg`}
         width="264"

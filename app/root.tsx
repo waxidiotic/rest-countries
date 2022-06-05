@@ -5,7 +5,8 @@ import {
   Meta,
   Outlet,
   Scripts,
-  ScrollRestoration
+  ScrollRestoration,
+  useBeforeUnload
 } from "@remix-run/react";
 import Nav from "./components/Nav";
 
@@ -33,7 +34,10 @@ export const links: LinksFunction = () => [
 
 export default function App() {
   return (
-    <html lang="en" className="text-text-dark bg-background-light h-full">
+    <html
+      lang="en"
+      className="text-text-dark bg-background-light dark:bg-background-dark h-full"
+    >
       <head>
         <Meta />
         <Links />
