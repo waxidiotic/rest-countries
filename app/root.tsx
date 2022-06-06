@@ -5,8 +5,7 @@ import {
   Meta,
   Outlet,
   Scripts,
-  ScrollRestoration,
-  useBeforeUnload
+  ScrollRestoration
 } from "@remix-run/react";
 import Nav from "./components/Nav";
 
