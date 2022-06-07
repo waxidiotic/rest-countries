@@ -3,6 +3,7 @@ import { Form, useLoaderData } from "@remix-run/react";
 import { useState } from "react";
 import { MdSearch } from "react-icons/md";
 import CountryCard from "~/components/CountryCard";
+import RegionFilter from "~/components/RegionFilter";
 import type { Country } from "~/types";
 
 export async function loader() {
@@ -16,7 +17,7 @@ export default function Index() {
 
   return (
     <main className="px-4 py-6 sm:px-20 sm:py-10 max-w-[1441px]">
-      <div>
+      <div className="flex justify-between">
         <div className="relative rounded-md shadow-md w-full sm:w-[480px] h-14 text-input-light">
           <div className="absolute inset-y-0 left-0 pl-8 flex items-center pointer-events-none">
             <MdSearch className="fill-input-light dark:fill-white h-7 w-7" />
@@ -34,7 +35,7 @@ export default function Index() {
             />
           </Form>
         </div>
-        <div>{/* TODO: Filter dropdown */}</div>
+        <RegionFilter />
       </div>
       <div className="mt-10 flex flex-wrap gap-[75px] w-full sm:flex-row flex-col items-center sm:items-start">
         {searchTerm

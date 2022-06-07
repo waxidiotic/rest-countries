@@ -9,6 +9,7 @@
     "dev:css": "tailwindcss -w -i ./styles/tailwind.css -o app/tailwind.css"
   },
   "dependencies": {
+    "@headlessui/react": "^1.6.4",
     "@remix-run/node": "^1.5.1",
     "@remix-run/react": "^1.5.1",
     "@remix-run/vercel": "^1.5.1",
