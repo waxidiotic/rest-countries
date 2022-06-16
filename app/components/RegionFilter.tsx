@@ -2,10 +2,17 @@ import { useState } from "react";
 import { Combobox } from "@headlessui/react";
 import { MdArrowDownward } from "react-icons/md";
 
-const regions = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
+const regions = [
+  "Filter by Region",
+  "Africa",
+  "Americas",
+  "Asia",
+  "Europe",
+  "Oceania"
+];
 
 export default function RegionFilter() {
-  const [selectedRegion, setSelectedRegion] = useState(null);
+  const [selectedRegion, setSelectedRegion] = useState(regions[0]);
   const [query, setQuery] = useState("");
 
   const filteredRegions =
