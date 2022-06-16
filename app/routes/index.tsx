@@ -1,5 +1,5 @@
 import { json } from "@remix-run/node";
-import { Form, useLoaderData } from "@remix-run/react";
+import { Form, Link, useLoaderData } from "@remix-run/react";
 import { useState } from "react";
 import { MdSearch } from "react-icons/md";
 import CountryCard from "~/components/CountryCard";
@@ -45,7 +45,9 @@ export default function Index() {
               )
               .map((country, i) => <CountryCard country={country} key={i} />)
           : countries.map((country, i) => (
-              <CountryCard country={country} key={i} />
+              <Link to={`/countries/${country.cca2.toLowerCase()}`} key={i}>
+                <CountryCard country={country} />
+              </Link>
             ))}
       </div>
     </main>
