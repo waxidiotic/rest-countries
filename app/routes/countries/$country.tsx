@@ -1,6 +1,6 @@
 import { json } from "@remix-run/node";
 import type { LoaderFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import type { Country } from "~/types";
 
@@ -26,10 +26,12 @@ export default function CountryDetail() {
 
   return (
     <main className="px-4 py-6 sm:px-20 sm:py-10 max-w-[1441px] flex flex-col gap-20">
-      <div className="w-[136px] h-10 dark:bg-elements-dark dark:text-white flex items-center font-light gap-2 pl-8 rounded-md cursor-pointer dark:hover:bg-elements-dark/50 dark:shadow-none shadow-md bg-white hover:bg-white/30">
-        <MdOutlineKeyboardBackspace className="h-5 w-5" />
-        Back
-      </div>
+      <Link to="/">
+        <div className="w-[136px] h-10 dark:bg-elements-dark dark:text-white flex items-center font-light gap-2 pl-8 rounded-md cursor-pointer dark:hover:bg-elements-dark/50 dark:shadow-none shadow-md bg-white hover:bg-white/30">
+          <MdOutlineKeyboardBackspace className="h-5 w-5" />
+          Back
+        </div>
+      </Link>
       <div className="flex w-full">
         <div className="w-[560px] mr-36">
           <img

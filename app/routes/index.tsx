@@ -43,7 +43,11 @@ export default function Index() {
               .filter(country =>
                 country.name.common.toLowerCase().includes(searchTerm)
               )
-              .map((country, i) => <CountryCard country={country} key={i} />)
+              .map((country, i) => (
+                <Link to={`/countries/${country.cca2.toLowerCase()}`} key={i}>
+                  <CountryCard country={country} key={i} />
+                </Link>
+              ))
           : countries.map((country, i) => (
               <Link to={`/countries/${country.cca2.toLowerCase()}`} key={i}>
                 <CountryCard country={country} />

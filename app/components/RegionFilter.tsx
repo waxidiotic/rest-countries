@@ -1,9 +1,13 @@
-import { useState } from "react";
-import { Combobox } from "@headlessui/react";
+import { Fragment, useState } from "react";
+import { Menu, Transition } from "@headlessui/react";
 import { MdArrowDownward } from "react-icons/md";
 
+function classNames(...classes: String[]) {
+  return classes.filter(Boolean).join(" ");
+}
+
 const regions = [
-  "Filter by Region",
+  "All Regions",
   "Africa",
   "Americas",
   "Asia",
@@ -13,46 +17,47 @@ const regions = [
 
 export default function RegionFilter() {
   const [selectedRegion, setSelectedRegion] = useState(regions[0]);
-  const [query, setQuery] = useState("");
-
-  const filteredRegions =
-    query === ""
-      ? regions
-      : regions.filter(region =>
-          region.toLowerCase().includes(query.toLowerCase())
-        );
 
   return (
-    <Combobox value={selectedRegion} onChange={setSelectedRegion} nullable>
-      <div className="relative w-[200px] h-14">
-        <div className="relative w-full h-full cursor-default overflow-hidden bg-white dark:bg-elements-dark text-left shadow-md rounded-md pl-2">
-          <Combobox.Input
-            onChange={event => setQuery(event.target.value)}
-            className="h-full dark:bg-elements-dark dark:text-white text-sm outline-none border-none focus:outline-none focus-visible:outline-none focus:ring-0"
-          />
-          <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
-            <MdArrowDownward
-              className="h-5- w-5 text-gray-400"
-              aria-hidden="true"
-            />
-          </Combobox.Button>
-        </div>
-        <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-          {filteredRegions.map(region => (
-            <Combobox.Option
-              key={region}
-              value={region}
-              className={({ active }) =>
-                `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                  active ? "bg-teal-600 text-white" : "text-gray-900"
-                }`
-              }
-            >
-              {region}
-            </Combobox.Option>
-          ))}
-        </Combobox.Options>
+    <Menu as="div" className="relative inline-block text-left w-[200px]">
+      <div>
+        <Menu.Button className="inline-flex justify-between w-full rounded-md h-14 items-center shadow-md px-4 py-2 bg-white dark:text-white dark:bg-elements-dark text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
+          {selectedRegion}
+          <MdArrowDownward className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
+        </Menu.Button>
       </div>
-    </Combobox>
+
+      <Transition
+        as={Fragment}
+        enter="transition ease-out duration-100"
+        enterFrom="transform opacity-0 scale-95"
+        enterTo="transform opacity-100 scale-100"
+        leave="transition ease-in duration-75"
+        leaveFrom="transform opacity-100 scale-100"
+        leaveTo="transform opacity-0 scale-95"
+      >
+        <Menu.Items className="origin-top-right absolute right-0 mt-2 w-[200px] rounded-md shadow-lg bg-white dark:text-white dark:bg-elements-dark ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <div className="py-1">
+            {regions.map(region => (
+              <Menu.Item key={region}>
+                {({ active }) => (
+                  <span
+                    className={classNames(
+                      active ? "bg-gray-100 dark:bg-white/10" : "",
+                      "block px-4 py-2 text-sm cursor-default text-dark"
+                    )}
+                    onClick={() => {
+                      setSelectedRegion(region);
+                    }}
+                  >
+                    {region}
+                  </span>
+                )}
+              </Menu.Item>
+            ))}
+          </div>
+        </Menu.Items>
+      </Transition>
+    </Menu>
   );
 }
