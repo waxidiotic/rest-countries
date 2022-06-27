@@ -4,6 +4,7 @@ import { useState } from "react";
 import { MdSearch } from "react-icons/md";
 import CountryCard from "~/components/CountryCard";
 import RegionFilter from "~/components/RegionFilter";
+import type { Region } from "~/components/RegionFilter";
 import type { Country } from "~/types";
 
 export async function loader() {
@@ -14,10 +15,13 @@ export async function loader() {
 export default function Index() {
   const countries = useLoaderData<Country[]>();
   const [searchTerm, setSearchTerm] = useState<string>();
+  const [selectedRegion, setSelectedRegion] = useState<Region>("All Regions");
+
+  console.log(selectedRegion);
 
   return (
     <main className="px-4 py-6 sm:px-20 sm:py-10 max-w-[1441px]">
-      <div className="flex justify-between">
+      <div className="flex justify-between sm:flex-row flex-col">
         <div className="relative rounded-md shadow-md w-full sm:w-[480px] h-14 text-input-light">
           <div className="absolute inset-y-0 left-0 pl-8 flex items-center pointer-events-none">
             <MdSearch className="fill-input-light dark:fill-white h-7 w-7" />
@@ -35,13 +39,21 @@ export default function Index() {
             />
           </Form>
         </div>
-        <RegionFilter />
+        <RegionFilter
+          selectedRegion={selectedRegion}
+          setSelectedRegion={setSelectedRegion}
+        />
       </div>
       <div className="mt-10 flex flex-wrap gap-[75px] w-full sm:flex-row flex-col items-center sm:items-start">
-        {searchTerm
+        {searchTerm || selectedRegion !== "All Regions"
           ? countries
-              .filter(country =>
-                country.name.common.toLowerCase().includes(searchTerm)
+              .filter(
+                country =>
+                  country.name.common
+                    .toLowerCase()
+                    .includes(searchTerm || "") &&
+                  country.region ===
+                    (selectedRegion === "All Regions" ? "" : selectedRegion)
               )
               .map((country, i) => (
                 <Link to={`/countries/${country.cca2.toLowerCase()}`} key={i}>

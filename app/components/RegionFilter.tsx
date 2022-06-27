@@ -1,6 +1,7 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { MdArrowDownward } from "react-icons/md";
+import type { Dispatch, SetStateAction } from "react";
 
 function classNames(...classes: String[]) {
   return classes.filter(Boolean).join(" ");
@@ -13,13 +14,22 @@ const regions = [
   "Asia",
   "Europe",
   "Oceania"
-];
+] as const;
 
-export default function RegionFilter() {
-  const [selectedRegion, setSelectedRegion] = useState(regions[0]);
+export type Region = typeof regions[number];
 
+export default function RegionFilter({
+  selectedRegion,
+  setSelectedRegion
+}: {
+  selectedRegion: Region;
+  setSelectedRegion: Dispatch<SetStateAction<Region>>;
+}) {
   return (
-    <Menu as="div" className="relative inline-block text-left w-[200px]">
+    <Menu
+      as="div"
+      className="relative inline-block text-left w-[200px]  mt-10 sm:mt-0"
+    >
       <div>
         <Menu.Button className="inline-flex justify-between w-full rounded-md h-14 items-center shadow-md px-4 py-2 bg-white dark:text-white dark:bg-elements-dark text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
           {selectedRegion}
